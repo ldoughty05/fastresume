@@ -40,6 +40,9 @@ Linux and Windows:
 $ cd ../frontend
 $ npm install
 ```
+5. Create .env file
+   Add file called ".env" to frontend directory.
+   Paste in the following text: VITE_API_URL="http://localhost:8000"
 ## Running
 1. Start the backend.
    From the root directory, run:
