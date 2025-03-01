@@ -2,28 +2,28 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Project(models.Model):
-    title = models.CharField(max_length=100)
-    date = models.DateField()
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes")
+# class Project(models.Model):
+#     title = models.CharField(max_length=100)
+#     date = models.DateField()
+#     description = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes")
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
 
-class Job(models.Model):
-    title = models.CharField(max_length=100)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    job_title = models.CharField(max_length=100)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes")
+# class Job(models.Model):
+#     title = models.CharField(max_length=100)
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+#     job_title = models.CharField(max_length=100)
+#     description = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes")
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
 class Experience(models.Model):
     title = models.CharField(max_length=100)
@@ -42,10 +42,14 @@ class JobExperience(Experience):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="job")
+
 
 class ProjectExperience(Experience):
     project_link = models.URLField(null=True, blank=True)
     article_link = models.URLField(null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="project")
+
 
 class EducationExperience(Experience):
     institution = models.CharField(max_length=100)
@@ -53,3 +57,4 @@ class EducationExperience(Experience):
     end_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=100)
     major = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="education")
