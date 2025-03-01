@@ -57,4 +57,9 @@ $ cd frontend
 $ npm run dev
 ```
 
+### Navigation
+REGISTER: http://localhost:5173/register
 
+LOGIN: http://localhost:5173/register
+
+HOME PAGE: http://localhost:5173/
