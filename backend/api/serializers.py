@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note
+from .models import Project, Job
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,8 +15,15 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class NoteSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Note
-        fields = ["id", "title", "content", "created_at", "author"]
+        model = Project
+        fields = ["id", "title", "date", "description", "created_at", "author"]
+        extra_kwargs = {"author": {"read_only": True}}
+
+
+class JobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = ["id", "title", "start_date", "end_date", "job_title", "description", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}

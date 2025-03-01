@@ -1,15 +1,15 @@
-.note-container {
+.experience-container {
   padding: 10px;
   margin: 20px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.note-title {
+.experience-title {
   color: #333;
 }
 
-.note-content {
+.experience-content {
   color: #666;
 }
 
