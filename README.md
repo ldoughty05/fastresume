@@ -6,7 +6,7 @@ Authors: Luke Doughty, Oscar Hanson, Kojo Tenkorang
 Cornhacks 2025  
 
 ## Installation
-1. Clone the repository with:
+1. Clone the repository with:  
 Linux: 
 ```{bash}
 $ git clone git@github.com:ldoughty05/django-resume-app.git
@@ -17,7 +17,7 @@ Windows:
 $ git clone https://github.com/ldoughty05/django-resume-app
 $ cd django-resume-app
 ```
-2. Create and activate a virtual python environment.
+2. Create and activate a virtual python environment:  
 Linux:
 ```{bash}
 $ python3 -m venv env
@@ -28,13 +28,13 @@ Windows:
 $ python -m venv env
 $ env\scripts\activate.bat
 ```
-3. Install backend packages.
+3. Install backend packages:  
 Linux and Windows:
 ```{bash}
 $ cd backend
 $ pip install -r requirements.txt
 ```
-4. Install frontend packages.
+4. Install frontend packages:  
 Linux and Windows: 
 ```{bash}
 $ cd ../frontend
