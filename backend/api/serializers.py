@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,3 +20,21 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ["id", "title", "content", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}
+
+class JobExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "company", "start_date", "end_date", "location"]
+        extra_kwargs = {"user": {"read_only": True}}
+
+class ProjectExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "project_link", "article_link"]
+        extra_kwargs = {"user": {"read_only": True}}
+
+class EducationExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "institution", "start_date", "end_date", "location", "major"]
+        extra_kwargs = {"user": {"read_only": True}}
