@@ -1,7 +1,7 @@
 # Live Resume Builder
-Store all of your projects, activities, and job experience. This app generates a taylored resume based on a job description.
+Store all of your projects, activities, and job experience. This app generates a tailored resume based on a job description.
 
-Authors: Luke Doughty, Oscar, Kojo  
+Authors: Luke Doughty, Oscar Hanson, Kojo Tenkorang  
 
 Cornhacks 2025  
 
