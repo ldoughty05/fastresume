@@ -16,17 +16,37 @@ class UserSerializer(serializers.ModelSerializer):
 class JobExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobExperience
-        fields = ["id", "title", "bullet_points", "created_at", "user", "company", "start_date", "end_date", "location"]
-        extra_kwargs = {"user": {"read_only": True}}
+        fields = '__all__'
 
 class ProjectExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectExperience
-        fields = ["id", "title", "bullet_points", "created_at", "user", "project_link", "article_link"]
-        extra_kwargs = {"user": {"read_only": True}}
+        fields = '__all__'
 
 class EducationExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationExperience
-        fields = ["id", "title", "bullet_points", "created_at", "user", "institution", "start_date", "end_date", "location", "major"]
-        extra_kwargs = {"user": {"read_only": True}}
+        fields = '__all__'
+
+class ExperienceSerializer(serializers.Serializer):
+    experience_type = serializers.CharField() # We will specify the type in our request in the request data.
+
+    def to_representation(self, instance):
+        if isinstance(instance, JobExperience):
+            return JobExperienceSerializer(instance).data
+        elif isinstance(instance, ProjectExperience):
+            return ProjectExperienceSerializer(instance).data
+        elif isinstance(instance, EducationExperience):
+            return EducationExperienceSerializer(instance).data
+        return super().to_representation(instance)
+    
+    def to_internal_value(self, data):
+        experience_type = data.get('experience_type')
+        if experience_type == 'job':
+            return JobExperienceSerializer(data=data)
+        elif experience_type == 'project':
+            return ProjectExperienceSerializer(data=data)
+        elif experience_type == 'education':
+            return EducationExperienceSerializer(data=data)
+        return super().to_internal_value(data)
+
