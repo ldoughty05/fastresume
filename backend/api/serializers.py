@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Project, Job
-
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,16 +13,20 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-
-class ProjectSerializer(serializers.ModelSerializer):
+class JobExperienceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Project
-        fields = ["id", "title", "date", "description", "created_at", "author"]
-        extra_kwargs = {"author": {"read_only": True}}
+        model = JobExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "company", "start_date", "end_date", "location"]
+        extra_kwargs = {"user": {"read_only": True}}
 
-
-class JobSerializer(serializers.ModelSerializer):
+class ProjectExperienceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Job
-        fields = ["id", "title", "start_date", "end_date", "job_title", "description", "created_at", "author"]
-        extra_kwargs = {"author": {"read_only": True}}
+        model = ProjectExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "project_link", "article_link"]
+        extra_kwargs = {"user": {"read_only": True}}
+
+class EducationExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationExperience
+        fields = ["id", "title", "bullet_points", "created_at", "user", "institution", "start_date", "end_date", "location", "major"]
+        extra_kwargs = {"user": {"read_only": True}}
