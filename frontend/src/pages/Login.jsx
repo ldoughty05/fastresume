@@ -8,11 +8,14 @@ function Login() {
         navigate('/register/'); // or /api/user/register/?
     };
 
+    
     return <div>
         <Form route="/api/token/" method="login" />
         <button className="register-button" onClick={handleClick}>
             Register
         </button>
+
+        
     </div>
 }
 
