@@ -1,6 +1,7 @@
 import Form from "../components/Form"
 import { useNavigate } from 'react-router-dom';
 
+
 function Login() {
     const navigate = useNavigate();
 
@@ -10,13 +11,24 @@ function Login() {
 
     
     return <div>
-        <Form route="/api/token/" method="login" />
-        <button className="register-button" onClick={handleClick}>
-            Register
-        </button>
+    <div id ="logIn" >
 
         
+       
+        <img src ="LogoV2.png" alt = "logo"></img>
+        <Form route="/api/token/" method="login" />
+        
+        
     </div>
+    
+
+    <button className="register-button" onClick={handleClick}>
+            Register
+            
+        </button>
+
+    </div>
+    
 }
 
 export default Login

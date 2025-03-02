@@ -5,6 +5,7 @@
   justify-content: center;
   margin: 50px auto;
   padding: 20px;
+  width: 20%;
   border-radius: 8px;
   background-color: rgba(206, 208, 255, 1);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,4 +37,36 @@
 
 .form-button:hover {
   background-color: rgb(48, 51, 158);
+}
+
+img{
+  
+  padding: 30px;
+  width: 35%;
+  height: 10%;
+}
+
+#logIn{
+  display: flex;
+  justify-content: center;
+}
+
+
+#logo{
+  display: flex;
+  justify-content: center;
+}
+
+button{
+  display: flex;
+  align-self: right;
+  width: 5%;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: rgba(83, 87, 227, 1);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
