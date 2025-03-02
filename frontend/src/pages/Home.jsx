@@ -7,7 +7,7 @@ function Home() {
     const [experiences, setExperiences] = useState([]);
     const [bullet_points, setBullet_points] = useState("");
     const [title, setTitle] = useState("");
-    const [experienceType, setExperienceType] = useState("work");
+    const [experience_type, setExperienceType] = useState("work");
 
     useEffect(() => {
         getExperiences();
@@ -38,7 +38,7 @@ function Home() {
     const createExperience = (e) => {
         e.preventDefault();
         api
-            .post("/api/experiences/", { bullet_points, title })
+            .post("/api/experiences/", { bullet_points, title, experience_type })
             .then((res) => {
                 if (res.status === 201) alert("Experience created!");
                 else alert("Failed to create experience.");
@@ -61,7 +61,7 @@ function Home() {
                 <br />
                 <select name="experience_type" id="experience_type"
                     required onChange={(e) => setExperienceType(e.target.value)}
-                    value={experienceType}>
+                    value={experience_type}>
                     <option value="education">Education</option>
                     <option value="project">Project</option>
                     <option value="volunteer">Volunteer</option>

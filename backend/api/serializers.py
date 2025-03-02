@@ -16,19 +16,35 @@ class UserSerializer(serializers.ModelSerializer):
 class JobExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobExperience
-        fields = '__all__'
+        fields = ['title', 'bullet_points', 'created_at', 'author', 'company', 'start_date', 'end_date', 'location']
+        extra_kwargs = {'author': {'read_only': True}}
+
+    def create(self, validated_data):
+        return JobExperience.objects.create(**validated_data)
 
 class ProjectExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectExperience
-        fields = '__all__'
+        fields = ['title', 'bullet_points', 'created_at', 'author', 'project_link', 'article_link']
+        extra_kwargs = {'author': {'read_only': True}}
+
+    def create(self, validated_data):
+        return ProjectExperience.objects.create(**validated_data)
 
 class EducationExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationExperience
-        fields = '__all__'
+        fields = ['title', 'bullet_points', 'created_at', 'author', 'institution', 'start_date', 'end_date', 'location', 'major']
+        extra_kwargs = {'author': {'read_only': True}}
+    
+    def create(self, validated_data):
+        return EducationExperience.objects.create(**validated_data)
 
 class ExperienceSerializer(serializers.Serializer):
+    class Meta:
+        fields = ['title', 'bullet_points', 'created_at', 'author']
+        extra_kwargs = {'author': {'read_only': True}}
+
     experience_type = serializers.CharField() # We will specify the type in our request in the request data.
 
     def to_representation(self, instance):
@@ -40,13 +56,27 @@ class ExperienceSerializer(serializers.Serializer):
             return EducationExperienceSerializer(instance).data
         return super().to_representation(instance)
     
-    def to_internal_value(self, data):
-        experience_type = data.get('experience_type')
-        if experience_type == 'job':
-            return JobExperienceSerializer(data=data)
+    # def to_internal_value(self, data):
+    #     experience_type = data.get('experience_type')
+    #     if experience_type == 'job':
+    #         return JobExperienceSerializer(data)
+    #     elif experience_type == 'project':
+    #         return ProjectExperienceSerializer(data)
+    #     elif experience_type == 'education':
+    #         return EducationExperienceSerializer(data)
+    #     return super().to_internal_value(data)
+    
+    def create(self, validated_data):
+        experience_type = validated_data.pop('experience_type', None).lower() # Removes this parameter from the object since we wont need it again.
+        user = self.context['request'].user  # Get the user from the request context
+        if experience_type == 'work':
+            jobExperience = JobExperience.objects.create(author=user, **validated_data)
+            return jobExperience
         elif experience_type == 'project':
-            return ProjectExperienceSerializer(data=data)
+            return ProjectExperience.objects.create(author=user, **validated_data)
         elif experience_type == 'education':
-            return EducationExperienceSerializer(data=data)
-        return super().to_internal_value(data)
+            return EducationExperience.objects.create(author=user, **validated_data)
+        else:
+            raise serializers.ValidationError({"experience_type": "Invalid experience type: " + experience_type})
+
 
