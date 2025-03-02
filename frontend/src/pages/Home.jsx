@@ -5,8 +5,9 @@ import "../styles/Home.css"
 
 function Home() {
     const [experiences, setExperiences] = useState([]);
-    const [content, setContent] = useState("");
+    const [bullet_points, setBullet_points] = useState("");
     const [title, setTitle] = useState("");
+    const [experienceType, setExperienceType] = useState("work");
 
     useEffect(() => {
         getExperiences();
@@ -37,7 +38,7 @@ function Home() {
     const createExperience = (e) => {
         e.preventDefault();
         api
-            .post("/api/experiences/", { content, title })
+            .post("/api/experiences/", { bullet_points, title })
             .then((res) => {
                 if (res.status === 201) alert("Experience created!");
                 else alert("Failed to create experience.");
@@ -49,13 +50,24 @@ function Home() {
     return (
         <div>
             <div>
-                <h2>Notes</h2>
+                <h2>Experiences</h2>
                 {experiences.map((experience) => (
                     <Experience experience={experience} onDelete={deleteExperience} key={experience.id} />
                 ))}
             </div>
             <h2>Add an Experience</h2>
             <form onSubmit={createExperience}>
+                <label htmlFor="experience_type">Experience Type:</label>
+                <br />
+                <select name="experience_type" id="experience_type"
+                    required onChange={(e) => setExperienceType(e.target.value)}
+                    value={experienceType}>
+                    <option value="education">Education</option>
+                    <option value="project">Project</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="work">Work</option>
+                </select>
+                <br />
                 <label htmlFor="title">Title:</label>
                 <br />
                 <input
@@ -66,14 +78,14 @@ function Home() {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                 />
-                <label htmlFor="content">Content:</label>
+                <label htmlFor="bullet_points">Bullet Points: (write one per line)</label>
                 <br />
                 <textarea
-                    id="content"
-                    name="content"
+                    id="bullet_points"
+                    name="bullet_points"
                     required
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    value={bullet_points}
+                    onChange={(e) => setBullet_points(e.target.value)}
                 ></textarea>
                 <br />
                 <input type="submit" value="Submit"></input>
