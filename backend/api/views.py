@@ -7,16 +7,19 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import * 
 
+def get_experience_queryset(self):
+    user = self.request.user
+    job_experiences = JobExperience.objects.filter(author=user)
+    project_experiences = ProjectExperience.objects.filter(author=user)
+    education_experiences = EducationExperience.objects.filter(author=user)
+    return list(chain(job_experiences, project_experiences, education_experiences))
+
 class ExperienceListCreate(generics.ListCreateAPIView):
     serializer_class = ExperienceSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = self.request.user
-        job_experiences = JobExperience.objects.filter(author=user)
-        project_experiences = ProjectExperience.objects.filter(author=user)
-        education_experiences = EducationExperience.objects.filter(author=user)
-        return list(chain(job_experiences, project_experiences, education_experiences))
+        return get_experience_queryset(self)
     
     # def perform_create(self, serializer):
     #     experience_type = self.request.data.get('experience_type')
@@ -37,11 +40,7 @@ class ExperienceDelete(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = self.request.user
-        return JobExperience.objects.filter(author=user).union(
-            ProjectExperience.objects.filter(author=user),
-            EducationExperience.objects.filter(author=user)
-        )
+        return get_experience_queryset(self)
 
 
 class CreateUserView(generics.CreateAPIView):

@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class JobExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobExperience
-        fields = ['title', 'bullet_points', 'created_at', 'author', 'company', 'start_date', 'end_date', 'location']
+        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'company', 'start_date', 'end_date', 'location']
         extra_kwargs = {'author': {'read_only': True}}
 
     def create(self, validated_data):
@@ -25,7 +25,7 @@ class JobExperienceSerializer(serializers.ModelSerializer):
 class ProjectExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectExperience
-        fields = ['title', 'bullet_points', 'created_at', 'author', 'project_link', 'article_link']
+        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'project_link', 'article_link']
         extra_kwargs = {'author': {'read_only': True}}
 
     def create(self, validated_data):
@@ -34,7 +34,7 @@ class ProjectExperienceSerializer(serializers.ModelSerializer):
 class EducationExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationExperience
-        fields = ['title', 'bullet_points', 'created_at', 'author', 'institution', 'start_date', 'end_date', 'location', 'major']
+        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'institution', 'start_date', 'end_date', 'location', 'major']
         extra_kwargs = {'author': {'read_only': True}}
     
     def create(self, validated_data):
@@ -42,7 +42,7 @@ class EducationExperienceSerializer(serializers.ModelSerializer):
 
 class ExperienceSerializer(serializers.Serializer):
     class Meta:
-        fields = ['title', 'bullet_points', 'created_at', 'author']
+        fields = ['id', 'title', 'bullet_points', 'created_at', 'author']
         extra_kwargs = {'author': {'read_only': True}}
 
     experience_type = serializers.CharField() # We will specify the type in our request in the request data.
@@ -78,5 +78,4 @@ class ExperienceSerializer(serializers.Serializer):
             return EducationExperience.objects.create(author=user, **validated_data)
         else:
             raise serializers.ValidationError({"experience_type": "Invalid experience type: " + experience_type})
-
 

@@ -5,8 +5,8 @@ import "../styles/Experience.css";
 
 
 Experience.propTypes = {
-    experience: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.isRequired,
+  experience: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
 }
 function Experience(props) {
     const formattedCreatedAtDate = new Date(props.experience.created_at).toLocaleDateString("en-US")
