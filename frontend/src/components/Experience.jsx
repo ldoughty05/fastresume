@@ -13,13 +13,15 @@ function Experience(props) {
 
     return (
         <div className="experience-container">
-            <p className="experience-title">{props.experience.title}</p>
+            <h1 className="experience-title">{props.experience.title}</h1>
+            {(props.experience.start_date) && 
+                <h3 className="experience-start-end-dates">{props.experience.start_date} to {props.experience.end_date || "Present"}</h3>}
             <ul className="experience-bullet-points">
                 {props.experience.bullet_points.map((bullet_point, index) => (
                     <li key={index}>{bullet_point}</li>
                 ))}
             </ul>
-            <p className="experience-created-at-date">{formattedCreatedAtDate}</p>
+            <p className="experience-created-at-date"><i>Created at: {formattedCreatedAtDate}</i></p>
             <button className="delete-button" onClick={() => props.onDelete(props.experience.id)}>
                 Delete
             </button>

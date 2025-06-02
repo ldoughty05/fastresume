@@ -4,22 +4,27 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css"
 import LoadingIndicator from "./LoadingIndicator";
+import PropTypes from "prop-types";
 
-function Form({ route, method }) {
+Form.propTypes = {
+    route: PropTypes.string.isRequired,
+    method: PropTypes.oneOf(["login", "register"]).isRequired,
+}
+function Form(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const name = method === "login" ? "Login" : "Register";
+    const name = props.method === "login" ? "Login" : "Register";
 
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
 
         try {
-            const res = await api.post(route, { username, password })
-            if (method === "login") {
+            const res = await api.post(props.route, { username, password })
+            if (props.method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
                 navigate("/")

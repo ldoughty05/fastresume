@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import *
 
+generic_experience_fields = ['id', 'title', 'start_date', 'end_date', 'bullet_points', 'created_at', 'author']
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -9,14 +11,13 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
-        print(validated_data)
         user = User.objects.create_user(**validated_data)
         return user
 
 class JobExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobExperience
-        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'company', 'start_date', 'end_date', 'location']
+        fields = [*generic_experience_fields, 'company', 'location']
         extra_kwargs = {'author': {'read_only': True}}
 
     def create(self, validated_data):
@@ -25,7 +26,7 @@ class JobExperienceSerializer(serializers.ModelSerializer):
 class ProjectExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectExperience
-        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'project_link', 'article_link']
+        fields = [*generic_experience_fields, 'project_link', 'article_link']
         extra_kwargs = {'author': {'read_only': True}}
 
     def create(self, validated_data):
@@ -34,7 +35,7 @@ class ProjectExperienceSerializer(serializers.ModelSerializer):
 class EducationExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationExperience
-        fields = ['id', 'title', 'bullet_points', 'created_at', 'author', 'institution', 'start_date', 'end_date', 'location', 'major']
+        fields = [*generic_experience_fields, 'institution', 'location', 'major']
         extra_kwargs = {'author': {'read_only': True}}
     
     def create(self, validated_data):
@@ -42,10 +43,19 @@ class EducationExperienceSerializer(serializers.ModelSerializer):
 
 class ExperienceSerializer(serializers.Serializer):
     class Meta:
-        fields = ['id', 'title', 'bullet_points', 'created_at', 'author']
+        fields = generic_experience_fields
         extra_kwargs = {'author': {'read_only': True}}
 
     experience_type = serializers.CharField() # We will specify the type in our request in the request data.
+    title = serializers.CharField(max_length=100)
+    start_date = serializers.DateField(required=False, allow_null=True)
+    end_date = serializers.DateField(required=False, allow_null=True)
+    bullet_points = serializers.ListField( # list...
+        child=serializers.CharField(max_length=200), # ...of strings
+        max_length=8,
+        allow_empty=True,
+        default=list
+    )
 
     def to_representation(self, instance):
         if isinstance(instance, JobExperience):
@@ -56,22 +66,12 @@ class ExperienceSerializer(serializers.Serializer):
             return EducationExperienceSerializer(instance).data
         return super().to_representation(instance)
     
-    # def to_internal_value(self, data):
-    #     experience_type = data.get('experience_type')
-    #     if experience_type == 'job':
-    #         return JobExperienceSerializer(data)
-    #     elif experience_type == 'project':
-    #         return ProjectExperienceSerializer(data)
-    #     elif experience_type == 'education':
-    #         return EducationExperienceSerializer(data)
-    #     return super().to_internal_value(data)
     
     def create(self, validated_data):
         experience_type = validated_data.pop('experience_type', None).lower() # Removes this parameter from the object since we wont need it again.
         user = self.context['request'].user  # Get the user from the request context
         if experience_type == 'work':
-            jobExperience = JobExperience.objects.create(author=user, **validated_data)
-            return jobExperience
+            return JobExperience.objects.create(author=user, **validated_data)
         elif experience_type == 'project':
             return ProjectExperience.objects.create(author=user, **validated_data)
         elif experience_type == 'education':

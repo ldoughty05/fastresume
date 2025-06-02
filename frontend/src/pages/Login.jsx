@@ -10,25 +10,19 @@ function Login() {
     };
 
     
-    return <div>
-    <div id ="logIn" >
-
-        
-       
-        <img src ="LogoV2.png" alt = "logo"></img>
-        <Form route="/api/token/" method="login" />
-        
-        
-    </div>
+    return (
+    <div>
+        <div id ="logIn" >
+            <img src ="LogoV2.png" alt = "logo"></img>
+            <Form route="/api/token/" method="login" />
+        </div>
     
-
-    <button className="register-button" onClick={handleClick}>
+        <button className="register-button" onClick={handleClick}>
             Register
-            
         </button>
 
     </div>
-    
+    )
 }
 
 export default Login

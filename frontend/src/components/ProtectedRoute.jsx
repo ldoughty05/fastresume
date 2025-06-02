@@ -3,14 +3,17 @@ import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-
-function ProtectedRoute({ children }) {
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+}
+function ProtectedRoute(props) {
     const [isAuthorized, setIsAuthorized] = useState(null);
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false))
-    }, [])
+    })
 
     const refreshToken = async () => {
         const refreshToken = localStorage.getItem(REFRESH_TOKEN);
@@ -51,7 +54,7 @@ function ProtectedRoute({ children }) {
         return <div>Loading...</div>;
     }
 
-    return isAuthorized ? children : <Navigate to="/login" />;
+    return isAuthorized ? props.children : <Navigate to="/login" />;
 }
 
 export default ProtectedRoute;

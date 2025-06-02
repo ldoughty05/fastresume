@@ -20,19 +20,6 @@ class ExperienceListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return get_experience_queryset(self)
-    
-    # def perform_create(self, serializer):
-    #     experience_type = self.request.data.get('experience_type')
-    #     if experience_type == 'job':
-    #         serializer = JobExperienceSerializer(data=self.request.data)
-    #     elif experience_type == 'project':
-    #         serializer = ProjectExperienceSerializer(data=self.request.data)
-    #     elif experience_type == 'education':
-    #         serializer = EducationExperienceSerializer(data=self.request.data)
-    #     if serializer.is_valid():
-    #         serializer.save(user=self.request.user)
-    #     else:
-    #         print(serializer.errors)
 
 
 class ExperienceDelete(generics.DestroyAPIView):
