@@ -8,8 +8,8 @@ CreateExperience.propTypes = {
 function CreateExperience(props){
     const [bullet_points, setBullet_points] = useState(""); // a single string with bullet points separated by new lines
     const [title, setTitle] = useState(""); // string
-    const [start_date, setStart_date] = useState(); // a string in yyyy-MM-dd format
-    const [end_date, setEnd_date] = useState();// a string in yyyy-MM-dd format
+    const [start_date, setStart_date] = useState(""); // a string in yyyy-MM-dd format
+    const [end_date, setEnd_date] = useState("");// a string in yyyy-MM-dd format
     const [experience_type, setExperienceType] = useState("work"); // string
 
 
@@ -24,7 +24,13 @@ function CreateExperience(props){
         }
         e.preventDefault();
         api
-            .post("/api/experiences/", {title, start_date, end_date, bullet_points: bullet_points_list, experience_type })
+            .post("/api/experiences/all/", {
+              title:title,
+              start_data: start_date || null,
+              end_date: end_date || null,
+              bullet_points: bullet_points_list,
+              experience_type: experience_type,
+            })
             .then((res) => {
                 if (res.status === 201) alert("Experience created!");
                 else alert("Failed to create experience.");

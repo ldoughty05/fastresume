@@ -5,24 +5,41 @@ import CreateExperience from "../components/CreateExperience";
 import "../styles/Home.css"
 
 function Home() {
-    const [experiences, setExperiences] = useState([]); // list of experience objects
+    const [jobs, setJobs] = useState([]); // list of experience objects
+    const [education, setEducation] = useState([]); // list of experience objects
+    const [projects, setProjects] = useState([]); // list of experience objects
+
     useEffect(() => {
         getExperiencesFromDatabase();
     }, []);
 
     const getExperiencesFromDatabase = () => {
         api
-            .get("/api/experiences/")
+            .get("/api/experiences/jobs/")
             .then((res) => res.data)
             .then((data) => {
-                setExperiences(data);
+                setJobs(data);
+            })
+            .catch((err) => alert(err));
+        api
+            .get("/api/experiences/education/")
+            .then((res) => res.data)
+            .then((data) => {
+                setEducation(data);
+            })
+            .catch((err) => alert(err));
+        api
+            .get("/api/experiences/projects/")
+            .then((res) => res.data)
+            .then((data) => {
+                setProjects(data);
             })
             .catch((err) => alert(err));
     };
 
     const deleteExperienceFromDatabase = (id) => {
         api
-            .delete(`/api/experiences/delete/${id}/`)
+            .delete(`/api/experiences/all/delete/${id}/`)
             .then((res) => {
                 if (res.status === 204) alert("Experience deleted!");
                 else alert("Failed to delete experience.");
@@ -34,12 +51,21 @@ function Home() {
     return (
         <div>
             <div>
-                <h2>Experiences</h2>
-                {experiences.map((experience) => (
+                <h1>Education</h1>
+                {education.map((experience) => (
+                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
+                ))}
+                <h1>Jobs</h1>
+                {jobs.map((experience) => (
+                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
+                ))}
+                <h1>Projects</h1>
+                {projects.map((experience) => (
                     <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
                 ))}
             </div>
-            <h2>Add an Experience</h2>
+            <br/><br/>
+            <h1>Add an Experience</h1>
             <CreateExperience
                 getExperiences={getExperiencesFromDatabase}
             />

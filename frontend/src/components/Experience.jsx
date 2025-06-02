@@ -13,7 +13,7 @@ function Experience(props) {
 
     return (
         <div className="experience-container">
-            <h1 className="experience-title">{props.experience.title}</h1>
+            <h2 className="experience-title">{props.experience.title}</h2>
             {(props.experience.start_date) && 
                 <h3 className="experience-start-end-dates">{props.experience.start_date} to {props.experience.end_date || "Present"}</h3>}
             <ul className="experience-bullet-points">
