@@ -3,6 +3,10 @@ import api from "../api";
 import PropTypes from "prop-types";
 import "../styles/CreateExperience.css"
 
+function delimitString(string, delimiter) {
+  let list = string.split(delimiter); // splits long string into an array of strings delimited by new lines
+  return list.map((item) => item.trim()).filter((item) => item !== ""); // removes empty strings and trims whitespace
+}
 
 CreateExperience.propTypes = {
   getExperiences: PropTypes.func.isRequired, // function to update experiences list view immediately after creating a new experience
@@ -13,30 +17,38 @@ function CreateExperience(props){
     const [start_date, setStart_date] = useState(""); // a string in yyyy-MM-dd format
     const [end_date, setEnd_date] = useState("");// a string in yyyy-MM-dd format
     const [experience_type, setExperienceType] = useState("work"); // string
+    const [skills, setSkills] = useState(""); // a string of skills separated by commas
 
 
-    const createExperienceInDatabase = (e) => {
+    const createExperienceInDatabase = (event) => {
         let bullet_points_list = [];
         try {
-            bullet_points_list = bullet_points.split("\n"); // splits long string into an array of strings delimited by new lines
-            bullet_points_list = bullet_points_list.map((point) => point.trim()).filter((point) => point !== ""); // removes empty strings and trims whitespace
+            bullet_points_list = delimitString(bullet_points, "\n");
         } catch (error) {
             alert("Error processing bullet points. Please ensure they are formatted correctly.");
             return;
         }
-        e.preventDefault();
+        let skills_list = [];
+        try {
+            skills_list = delimitString(skills, ",");
+        } catch (error) {
+            alert("Error processing skills. Please ensure they are formatted correctly.");
+            return;
+        }
+        event.preventDefault();
         api
             .post("/api/experiences/all/", {
+              experience_type: experience_type,
               title:title,
               start_date: start_date || null,
               end_date: end_date || null,
               bullet_points: bullet_points_list,
-              experience_type: experience_type,
+              skills: skills_list,
             })
             .then((res) => {
                 if (res.status === 201) alert("Experience created!");
                 else alert("Failed to create experience.");
-                props.getExperiences(); // Does this need to be here? 
+                props.getExperiences();
             })
             .catch((err) => alert(err));
     };
@@ -90,6 +102,14 @@ function CreateExperience(props){
         value={bullet_points}
         onChange={(e) => setBullet_points(e.target.value)}
       ></textarea>
+      <label htmlFor="skills">Skills:</label>
+      <input
+        type="text"
+        id="skills"
+        name="skills"
+        onChange={(e) => setSkills(e.target.value)}
+        value={skills}
+      />
       <input type="submit" value="Submit"></input>
     </form>
   )
