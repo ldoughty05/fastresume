@@ -1,6 +1,8 @@
 import { useState } from "react";
 import api from "../api";
 import PropTypes from "prop-types";
+import "../styles/CreateExperience.css"
+
 
 CreateExperience.propTypes = {
   getExperiences: PropTypes.func.isRequired, // function to update experiences list view immediately after creating a new experience
@@ -26,7 +28,7 @@ function CreateExperience(props){
         api
             .post("/api/experiences/all/", {
               title:title,
-              start_data: start_date || null,
+              start_date: start_date || null,
               end_date: end_date || null,
               bullet_points: bullet_points_list,
               experience_type: experience_type,
@@ -40,9 +42,8 @@ function CreateExperience(props){
     };
 
   return (
-    <form onSubmit={createExperienceInDatabase}>
+    <form onSubmit={createExperienceInDatabase} className="create-experience-form">
       <label htmlFor="experience_type">Experience Type:</label>
-      <br />
       <select name="experience_type" id="experience_type"
         required onChange={(e) => setExperienceType(e.target.value)}
         value={experience_type}>
@@ -51,9 +52,7 @@ function CreateExperience(props){
         <option value="volunteer">Volunteer</option>
         <option value="work">Work</option>
       </select>
-      <br />
       <label htmlFor="title">Title:</label>
-      <br />
       <input
         type="text"
         id="title"
@@ -62,33 +61,35 @@ function CreateExperience(props){
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
-      <label htmlFor="start_date">Start Date:</label>
-      <br />
-      <input
-        type="date"
-        id="start_date"
-        name="start_date"
-        onChange={(e) => setStart_date(e.target.value)}
-        value={start_date}
-      />
-      <label htmlFor="end_date">End Date:</label>
-      <br />
-      <input
-        type="date"
-        id="end_date"
-        name="end_date"
-        onChange={(e) => setEnd_date(e.target.value)}
-        value={end_date}
-      />
+      <div className="date-inputs">
+        <div className="labeled-input-pair">
+          <label htmlFor="start_date">Start Date:</label>
+          <input
+            type="date"
+            id="start_date"
+            name="start_date"
+            onChange={(e) => setStart_date(e.target.value)}
+            value={start_date}
+          />
+        </div>
+        <div className="labeled-input-pair">
+          <label htmlFor="end_date">End Date:</label>
+          <input
+            type="date"
+            id="end_date"
+            name="end_date"
+            onChange={(e) => setEnd_date(e.target.value)}
+            value={end_date}
+          />
+        </div>
+      </div>
       <label htmlFor="bullet_points">Bullet Points: (write one per line)</label>
-      <br />
       <textarea
         id="bullet_points"
         name="bullet_points"
         value={bullet_points}
         onChange={(e) => setBullet_points(e.target.value)}
       ></textarea>
-      <br />
       <input type="submit" value="Submit"></input>
     </form>
   )
