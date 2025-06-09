@@ -28,9 +28,9 @@ function CreateExperience(props){
             alert("Error processing bullet points. Please ensure they are formatted correctly.");
             return;
         }
-        let skills_list = [];
+        let skills_input_list = [];
         try {
-            skills_list = delimitString(skills, ",");
+            skills_input_list = delimitString(skills, ",");
         } catch (error) {
             alert("Error processing skills. Please ensure they are formatted correctly.");
             return;
@@ -43,7 +43,7 @@ function CreateExperience(props){
               start_date: start_date || null,
               end_date: end_date || null,
               bullet_points: bullet_points_list,
-              skills: skills_list,
+              skills_input_list: skills_input_list,
             })
             .then((res) => {
                 if (res.status === 201) alert("Experience created!");

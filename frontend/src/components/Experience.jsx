@@ -21,6 +21,16 @@ function Experience(props) {
                     <li key={index}>{bullet_point}</li>
                 ))}
             </ul>
+            <div className="experience-skills">
+                <strong>Skills:</strong>
+                {props.experience.skills.length > 0 ? (
+                    props.experience.skills.map((skill, index) => (
+                        <span key={index} className="skill-badge">{skill.name}, </span>
+                    ))
+                ) : (
+                    <span className="no-skills">No skills listed</span>
+                )}
+            </div>
             <p className="experience-created-at-date"><i>Created at: {formattedCreatedAtDate}</i></p>
             <button className="delete-button" onClick={() => props.onDelete(props.experience.id)}>
                 Delete
