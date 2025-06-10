@@ -12,49 +12,97 @@ CreateExperience.propTypes = {
   getExperiences: PropTypes.func.isRequired, // function to update experiences list view immediately after creating a new experience
 }
 function CreateExperience(props){
-    const [bullet_points, setBullet_points] = useState(""); // a single string with bullet points separated by new lines
-    const [title, setTitle] = useState(""); // string
-    const [start_date, setStart_date] = useState(""); // a string in yyyy-MM-dd format
-    const [end_date, setEnd_date] = useState("");// a string in yyyy-MM-dd format
-    const [experience_type, setExperienceType] = useState("work"); // string
-    const [skills, setSkills] = useState(""); // a string of skills separated by commas
+  const [bullet_points, setBullet_points] = useState(""); // a single string with bullet points separated by new lines
+  const [title, setTitle] = useState(""); // string
+  const [start_date, setStart_date] = useState(""); // a string in yyyy-MM-dd format
+  const [end_date, setEnd_date] = useState("");// a string in yyyy-MM-dd format
+  const [experience_type, setExperienceType] = useState("work"); // string
+  const [skills, setSkills] = useState(""); // a string of skills separated by commas
 
+  function sendJobExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list) {
+    api
+      .post("/api/experiences/jobs/", {
+        title:title,
+        start_date: start_date || null,
+        end_date: end_date || null,
+        bullet_points: bullet_points_list,
+        skills_input_list: skills_input_list,
+      })
+      .then((res) => {
+        if (res.status === 201) alert("Job experience created!");
+        else alert("Failed to create job experience.");
+        props.getExperiences();
+      })
+      .catch((err) => alert(err));
+  }
 
-    const createExperienceInDatabase = (event) => {
-        let bullet_points_list = [];
-        try {
-            bullet_points_list = delimitString(bullet_points, "\n");
-        } catch (error) {
-            alert("Error processing bullet points. Please ensure they are formatted correctly.");
-            return;
-        }
-        let skills_input_list = [];
-        try {
-            skills_input_list = delimitString(skills, ",");
-        } catch (error) {
-            alert("Error processing skills. Please ensure they are formatted correctly.");
-            return;
-        }
-        event.preventDefault();
-        api
-            .post("/api/experiences/all/", {
-              experience_type: experience_type,
-              title:title,
-              start_date: start_date || null,
-              end_date: end_date || null,
-              bullet_points: bullet_points_list,
-              skills_input_list: skills_input_list,
-            })
-            .then((res) => {
-                if (res.status === 201) alert("Experience created!");
-                else alert("Failed to create experience.");
-                props.getExperiences();
-            })
-            .catch((err) => alert(err));
-    };
+  function sendEducationExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list) {
+    api
+      .post("/api/experiences/education/", {
+        title:title,
+        start_date: start_date || null,
+        end_date: end_date || null,
+        bullet_points: bullet_points_list,
+        skills_input_list: skills_input_list,
+      })
+      .then((res) => {
+        if (res.status === 201) alert("Education experience created!");
+        else alert("Failed to create education experience.");
+        props.getExperiences();
+      })
+      .catch((err) => alert(err));
+  }
+
+  function sendProjectExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list) {
+    api
+      .post("/api/experiences/projects/", {
+        title:title,
+        start_date: start_date || null,
+        end_date: end_date || null,
+        bullet_points: bullet_points_list,
+        skills_input_list: skills_input_list,
+      })
+      .then((res) => {
+        if (res.status === 201) alert("Project experience created!");
+        else alert("Failed to create project experience.");
+        props.getExperiences();
+      })
+      .catch((err) => alert(err));
+    }
+
+  const sendExperienceDetailsToBackend = (event) => {
+    let bullet_points_list = [];
+    try {
+      bullet_points_list = delimitString(bullet_points, "\n");
+    } catch (error) {
+      alert("Error processing bullet points. Please ensure they are formatted correctly.");
+      return;
+    }
+    let skills_input_list = [];
+    try {
+      skills_input_list = delimitString(skills, ",");
+    } catch (error) {
+      alert("Error processing skills. Please ensure they are formatted correctly.");
+      return;
+    }
+    event.preventDefault(); // prevents page from reloading on form submission
+    switch (experience_type) {
+      case "education":
+        sendEducationExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list);
+        break;
+      case "project":
+        sendProjectExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list);
+        break;
+      case "job":
+        sendJobExperienceCreateRequest(title, start_date, end_date, bullet_points_list, skills_input_list);
+        break;
+      default:
+        alert("Invalid experience type selected. Please choose a valid option.");
+    }
+  }
 
   return (
-    <form onSubmit={createExperienceInDatabase} className="create-experience-form">
+    <form onSubmit={sendExperienceDetailsToBackend} className="create-experience-form">
       <label htmlFor="experience_type">Experience Type:</label>
       <select name="experience_type" id="experience_type"
         required onChange={(e) => setExperienceType(e.target.value)}
@@ -62,7 +110,7 @@ function CreateExperience(props){
         <option value="education">Education</option>
         <option value="project">Project</option>
         <option value="volunteer">Volunteer</option>
-        <option value="work">Work</option>
+        <option value="job">Job</option>
       </select>
       <label htmlFor="title">Title:</label>
       <input

@@ -15,7 +15,7 @@ def get_all_experience_queryset(self):
     return list(chain(job_experiences, project_experiences, education_experiences))
 
 class JobExperienceListCreate(generics.ListCreateAPIView):
-    serializer_class = ExperienceSerializer
+    serializer_class = JobExperienceSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -23,7 +23,7 @@ class JobExperienceListCreate(generics.ListCreateAPIView):
         return JobExperience.objects.filter(author=user)
     
 class EducationExperienceListCreate(generics.ListCreateAPIView):
-    serializer_class = ExperienceSerializer
+    serializer_class = EducationExperienceSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -31,7 +31,7 @@ class EducationExperienceListCreate(generics.ListCreateAPIView):
         return EducationExperience.objects.filter(author=user)
     
 class ProjectExperienceListCreate(generics.ListCreateAPIView):
-    serializer_class = ExperienceSerializer
+    serializer_class = ProjectExperienceSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

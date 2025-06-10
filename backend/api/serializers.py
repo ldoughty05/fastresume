@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import *
 
-generic_experience_fields = ['id', 'title', 'start_date', 'end_date', 'bullet_points', 'created_at', 'author']
+generic_experience_fields = ['id', 'title', 'start_date', 'end_date', 'bullet_points', 'created_at', 'author', 'skills']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,40 +13,26 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-
-class JobExperienceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JobExperience
-        fields = [*generic_experience_fields, 'company', 'location']
-        extra_kwargs = {'author': {'read_only': True}}
-
-    def create(self, validated_data):
-        return JobExperience.objects.create(**validated_data)
-
-class ProjectExperienceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProjectExperience
-        fields = [*generic_experience_fields, 'project_link', 'article_link']
-        extra_kwargs = {'author': {'read_only': True}}
-
-    def create(self, validated_data):
-        return ProjectExperience.objects.create(**validated_data)
-
-class EducationExperienceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EducationExperience
-        fields = [*generic_experience_fields, 'institution', 'location', 'major']
-        extra_kwargs = {'author': {'read_only': True}}
     
-    def create(self, validated_data):
-        return EducationExperience.objects.create(**validated_data)
 
-class ExperienceSerializer(serializers.Serializer):
+class SkillSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = generic_experience_fields
-        extra_kwargs = {'author': {'read_only': True}}
+        model = Skill
+        fields = ['id', 'name']
 
-    experience_type = serializers.CharField() # We will specify the type in our request in the request data.
+    name = serializers.CharField(max_length=50, required=True, allow_blank=False, trim_whitespace=True)
+
+    def validate_name(self, value):
+        return value.strip().lower()
+
+    def create(self, validated_data):
+        return Skill.objects.create(**validated_data)
+    
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience
+        fields = [*generic_experience_fields, 'company', 'location']
+    
     title = serializers.CharField(max_length=100)
     start_date = serializers.DateField(required=False, allow_null=True)
     end_date = serializers.DateField(required=False, allow_null=True)
@@ -56,26 +42,48 @@ class ExperienceSerializer(serializers.Serializer):
         allow_empty=True,
         default=list
     )
-
-    def to_representation(self, instance):
-        if isinstance(instance, JobExperience):
-            return JobExperienceSerializer(instance).data
-        elif isinstance(instance, ProjectExperience):
-            return ProjectExperienceSerializer(instance).data
-        elif isinstance(instance, EducationExperience):
-            return EducationExperienceSerializer(instance).data
-        return super().to_representation(instance)
+    skills_input_list = serializers.ListField(
+        child=serializers.CharField(max_length=50),
+        allow_empty=True,
+        required=False,
+        allow_null=True,
+        default=list,
+        write_only=True,
+    )
+    skills = SkillSerializer(many=True, read_only=True, required=False)
     
+    def get_skill_objects(self, skill_names):
+        skill_objects = []
+        for name in skill_names:
+            print(f"Processing skill name: {name}")
+            name = name.strip().lower()
+            skill, _ = Skill.objects.get_or_create(name=name)
+            skill_objects.append(skill)
+        return skill_objects
     
     def create(self, validated_data):
-        experience_type = validated_data.pop('experience_type', None).lower() # Removes this parameter from the object since we wont need it again.
         user = self.context['request'].user  # Get the user from the request context
-        if experience_type == 'work':
-            return JobExperience.objects.create(author=user, **validated_data)
-        elif experience_type == 'project':
-            return ProjectExperience.objects.create(author=user, **validated_data)
-        elif experience_type == 'education':
-            return EducationExperience.objects.create(author=user, **validated_data)
-        else:
-            raise serializers.ValidationError({"experience_type": "Invalid experience type: " + experience_type})
+        skill_objects = self.get_skill_objects(validated_data.pop('skills_input_list', []))
+        model = self.Meta.model.objects
+        experience = model.create(author=user, **validated_data)
+        experience.skills.set(skill_objects)
+        return experience
 
+
+class JobExperienceSerializer(ExperienceSerializer):
+    class Meta:
+        model = JobExperience
+        fields = [*generic_experience_fields, 'company', 'location']
+
+
+class ProjectExperienceSerializer(ExperienceSerializer):
+    class Meta:
+        model = ProjectExperience
+        fields = [*generic_experience_fields, 'project_link', 'article_link']
+
+
+class EducationExperienceSerializer(ExperienceSerializer):
+    class Meta:
+        model = EducationExperience
+        fields = [*generic_experience_fields, 'institution', 'location', 'major']
+    

@@ -52,16 +52,16 @@ function Home() {
         <div>
             <div>
                 <h1>Education</h1>
-                {education.map((experience) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
+                {education.map((experience, index) => (
+                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={`education-${index}`} />
                 ))}
                 <h1>Jobs</h1>
-                {jobs.map((experience) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
+                {jobs.map((experience, index) => (
+                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={`job-${index}`} />
                 ))}
                 <h1>Projects</h1>
-                {projects.map((experience) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={experience.id} />
+                {projects.map((experience, index) => (
+                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} key={`project-${index}`} />
                 ))}
             </div>
             <br/><br/>

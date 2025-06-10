@@ -10,6 +10,7 @@ Experience.propTypes = {
 }
 function Experience(props) {
     const formattedCreatedAtDate = new Date(props.experience.created_at).toLocaleDateString("en-US")
+    console.log(props.experience)
 
     return (
         <div className="experience-container">
