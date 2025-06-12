@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import *
 
-generic_experience_fields = ['id', 'title', 'start_date', 'end_date', 'bullet_points', 'created_at', 'author', 'skills']
+generic_experience_fields = ['id', 'start_date', 'end_date', 'bullet_points', 'created_at', 'author', 'skills']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,10 +32,9 @@ class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = [*generic_experience_fields, 'company', 'location']
-    
-    title = serializers.CharField(max_length=100)
-    start_date = serializers.DateField(required=False, allow_null=True)
-    end_date = serializers.DateField(required=False, allow_null=True)
+        extra_kwargs = {
+            'author': {'read_only': True},
+        }
     bullet_points = serializers.ListField( # list...
         child=serializers.CharField(max_length=200), # ...of strings
         max_length=8,
@@ -73,17 +72,38 @@ class ExperienceSerializer(serializers.ModelSerializer):
 class JobExperienceSerializer(ExperienceSerializer):
     class Meta:
         model = JobExperience
-        fields = [*generic_experience_fields, 'company', 'location']
-
+        fields = [*generic_experience_fields, 'institution', 'title', 'location']
+        extra_kwargs = {
+            'author': {'read_only': True},
+        }
+    institution = serializers.CharField(max_length=100, allow_blank=True) # ie company
+    title = serializers.CharField(max_length=100, allow_blank=True)
+    location = serializers.CharField(max_length=100, allow_blank=True)
+    # skills = serializers.ManyToManyField('Skill', related_name="job_experiences")
 
 class ProjectExperienceSerializer(ExperienceSerializer):
     class Meta:
         model = ProjectExperience
-        fields = [*generic_experience_fields, 'project_link', 'article_link']
+        fields = [*generic_experience_fields, 'title', 'links']
+        extra_kwargs = {
+            'author': {'read_only': True},
+        }
+    title = serializers.CharField(max_length=100, allow_blank=True)
+    links = serializers.JSONField(default=list)
+    # skills = serializers.ManyToManyField('Skill', related_name="project_experiences")
 
 
 class EducationExperienceSerializer(ExperienceSerializer):
     class Meta:
         model = EducationExperience
-        fields = [*generic_experience_fields, 'institution', 'location', 'major']
+        fields = [*generic_experience_fields, 'institution', 'location', 'focus', 'gpa', 'gpa_scale']
+        extra_kwargs = {
+            'author': {'read_only': True},
+        }
+    institution = serializers.CharField(max_length=100, allow_blank=True)
+    location = serializers.CharField(max_length=100, allow_blank=True)
+    focus = serializers.CharField(max_length=100, allow_blank=True) # ie major
+    gpa = serializers.DecimalField(max_digits=5, decimal_places=2, allow_null=True)
+    gpa_scale = serializers.IntegerField(default=4)
+    # skills = serializers.ManyToManyField('Skill', related_name="education_experiences")
     

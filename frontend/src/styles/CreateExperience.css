@@ -58,3 +58,15 @@ form input[type="submit"]:hover {
   justify-content: left;
   gap: 20px;
 }
+
+.date-inputs {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+}
+
+.gpa-and-scale-inputs {
+  display: flex;
+  justify-content: left;
+  gap: 20px;  
+}

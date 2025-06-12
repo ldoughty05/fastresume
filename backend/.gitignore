@@ -1,2 +1,4 @@
 .env
 db.sqlite3
+django_secrets.txt
+postgresql_secrets.txt

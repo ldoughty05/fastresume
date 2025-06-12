@@ -15,17 +15,29 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os
 
+def load_secrets(filepath):
+  secrets = {}
+  with open(filepath, 'r') as file:
+    for line in file:
+      if '=' in line:
+        key, value = line.strip().split('=', 1)
+        secrets[key] = value
+    return secrets
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+secrets = load_secrets(BASE_DIR / "backend/django_secrets.txt")
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-nma=xi6x2p-crjg^ifqqkapyu1qjd0l=+wn)-rijk_o%$!k3w_"
+SECRET_KEY = secrets["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -144,5 +156,9 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+  "https://lukedoughty.me",
+  "http://localhost:5173",
+  "http://localhost:5174"
+]
 CORS_ALLOWS_CREDENTIALS = True
