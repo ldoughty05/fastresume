@@ -132,14 +132,6 @@ JobSpecificFields.propTypes = {
 }
 function JobSpecificFields(props) {
   return (<>
-    <label htmlFor="company">Company:</label>
-    <input
-      type="text"
-      id="company"
-      name="company"
-      onChange={(e) => props.setInstitution(e.target.value)}
-      value={props.institution}
-    />
     <label htmlFor="title">Title:</label>
     <input
       type="text"
@@ -148,6 +140,14 @@ function JobSpecificFields(props) {
       required
       onChange={(e) => props.setTitle(e.target.value)}
       value={props.title}
+    />
+    <label htmlFor="company">Company:</label>
+    <input
+      type="text"
+      id="company"
+      name="company"
+      onChange={(e) => props.setInstitution(e.target.value)}
+      value={props.institution}
     />
     <label htmlFor="location">Location:</label>
     <input
@@ -375,12 +375,11 @@ function CreateExperience(props){
       SpecificFields = <JobSpecificFields {...jobFieldProps} />;
       break;
     case "project":
-      SpecificFields = <ProjectSpecificFields {...projectFieldProps} />;
+      SpecificFields  = <ProjectSpecificFields {...projectFieldProps} />;
       break;
     default:
       SpecificFields = null;
   }
-
 
   return (
     <form onSubmit={sendExperienceDetailsToBackend} className="create-experience-form">

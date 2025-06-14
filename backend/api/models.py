@@ -10,7 +10,7 @@ class Experience(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="experiences")
     skills = models.ManyToManyField('Skill', related_name="experiences")
-
+    
     class Meta:
         abstract = True
 
