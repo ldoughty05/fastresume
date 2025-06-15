@@ -15,29 +15,17 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os
 
-def load_secrets(filepath):
-  secrets = {}
-  with open(filepath, 'r') as file:
-    for line in file:
-      if '=' in line:
-        key, value = line.strip().split('=', 1)
-        secrets[key] = value
-    return secrets
-
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-secrets = load_secrets(BASE_DIR / "backend/django_secrets.txt")
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secrets["SECRET_KEY"]
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
