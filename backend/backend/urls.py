@@ -1,10 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 from api.views import CreateUserView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .authviews import KnownHostView
 
+def api_welcome(request):
+    return HttpResponse("Welcome to the FastResume API!")
 urlpatterns = [
+    path("", api_welcome, name="api-welcome"),
     path("admin/", admin.site.urls),
     path("api/user/register/", CreateUserView.as_view(), name="register"),
     path("api/token/", TokenObtainPairView.as_view(), name="get_token"),
