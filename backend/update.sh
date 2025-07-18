@@ -16,7 +16,7 @@ if [ -f gunicorn.pid ]; then
   sudo kill -HUP $(cat gunicorn.pid) # restart Gunicorn
 else
   echo "No Gunicorn PID file found, starting fresh."
-  sudo systemctl restart fastresume # restart the service
+  sudo systemctl restart fastresumebackend # restart the service
 fi
 
 echo `date "+%Y-%m-%d %H:%M:%S.%3N"` ' FastResume updated' >> fastresumebackend_update.log
