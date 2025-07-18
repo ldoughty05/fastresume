@@ -1,0 +1,230 @@
+[2025-07-18 06:37:44 +0100] [34345] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 06:37:44 +0100] [34345] [INFO] Listening at: unix:/home/pi/Git/fastresume/backend/fastresumebackend.sock (34345)
+[2025-07-18 06:37:44 +0100] [34345] [INFO] Using worker: sync
+[2025-07-18 06:37:44 +0100] [34346] [INFO] Booting worker with pid: 34346
+[2025-07-18 06:37:44 +0100] [34346] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresumebackend'
+[2025-07-18 06:37:44 +0100] [34346] [INFO] Worker exiting (pid: 34346)
+[2025-07-18 06:37:44 +0100] [34345] [ERROR] Worker (pid:34346) exited with code 3
+[2025-07-18 06:37:44 +0100] [34345] [ERROR] Shutting down: Master
+[2025-07-18 06:37:44 +0100] [34345] [ERROR] Reason: Worker failed to boot.
+[2025-07-18 06:38:10 +0100] [34356] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 06:38:10 +0100] [34356] [INFO] Listening at: unix:/home/pi/Git/fastresume/backend/fastresumebackend.sock (34356)
+[2025-07-18 06:38:10 +0100] [34356] [INFO] Using worker: sync
+[2025-07-18 06:38:10 +0100] [34357] [INFO] Booting worker with pid: 34357
+[2025-07-18 06:38:10 +0100] [34357] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresumebackend'
+[2025-07-18 06:38:10 +0100] [34357] [INFO] Worker exiting (pid: 34357)
+[2025-07-18 06:38:10 +0100] [34358] [INFO] Booting worker with pid: 34358
+[2025-07-18 06:38:10 +0100] [34358] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresumebackend'
+[2025-07-18 06:38:10 +0100] [34358] [INFO] Worker exiting (pid: 34358)
+[2025-07-18 06:38:10 +0100] [34356] [ERROR] Worker (pid:34357) exited with code 3
+[2025-07-18 06:38:10 +0100] [34356] [ERROR] Worker (pid:34358) was sent SIGTERM!
+[2025-07-18 06:38:10 +0100] [34356] [ERROR] Shutting down: Master
+[2025-07-18 06:38:10 +0100] [34356] [ERROR] Reason: Worker failed to boot.
+[2025-07-18 06:48:54 +0100] [34441] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 06:48:54 +0100] [34441] [INFO] Listening at: unix:/home/pi/Git/fastresume/backend/fastresumebackend.sock (34441)
+[2025-07-18 06:48:54 +0100] [34441] [INFO] Using worker: sync
+[2025-07-18 06:48:54 +0100] [34442] [INFO] Booting worker with pid: 34442
+[2025-07-18 06:48:54 +0100] [34442] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresume'
+[2025-07-18 06:48:54 +0100] [34442] [INFO] Worker exiting (pid: 34442)
+[2025-07-18 06:48:54 +0100] [34441] [ERROR] Worker (pid:34442) exited with code 3
+[2025-07-18 06:48:54 +0100] [34441] [ERROR] Shutting down: Master
+[2025-07-18 06:48:54 +0100] [34441] [ERROR] Reason: Worker failed to boot.
+[2025-07-18 06:49:14 +0100] [34448] [INFO] Starting gunicorn 23.0.0
+[2025-07-18 06:49:14 +0100] [34448] [INFO] Listening at: unix:/home/pi/Git/fastresume/backend/fastresumebackend.sock (34448)
+[2025-07-18 06:49:14 +0100] [34448] [INFO] Using worker: sync
+[2025-07-18 06:49:14 +0100] [34449] [INFO] Booting worker with pid: 34449
+[2025-07-18 06:49:14 +0100] [34449] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresume'
+[2025-07-18 06:49:14 +0100] [34449] [INFO] Worker exiting (pid: 34449)
+[2025-07-18 06:49:14 +0100] [34450] [INFO] Booting worker with pid: 34450
+[2025-07-18 06:49:14 +0100] [34450] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Git/fastresume/backend/venv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1128, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1142, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fastresume'
+[2025-07-18 06:49:14 +0100] [34450] [INFO] Worker exiting (pid: 34450)
+[2025-07-18 06:49:14 +0100] [34448] [ERROR] Worker (pid:34449) exited with code 3
+[2025-07-18 06:49:14 +0100] [34448] [ERROR] Worker (pid:34450) was sent SIGTERM!
+[2025-07-18 06:49:14 +0100] [34448] [ERROR] Shutting down: Master
+[2025-07-18 06:49:14 +0100] [34448] [ERROR] Reason: Worker failed to boot.
