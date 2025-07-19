@@ -11,7 +11,7 @@ jobs:
         working-directory: backend
     env:
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-
+      KNOWN_ORIGIN_LOGINS: ${{ secrets.KNOWN_ORIGIN_LOGINS }}
     steps:
     - uses: actions/checkout@v3
 
