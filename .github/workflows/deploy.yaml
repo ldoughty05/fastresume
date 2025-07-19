@@ -41,7 +41,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        run: |
+        script: |
           echo "Starting deployment to FastResume backend..."
           set -e
           cd ~/Git/fastresume/backend
