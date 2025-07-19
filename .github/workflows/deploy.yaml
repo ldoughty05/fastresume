@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: fastresume/backend
+        working-directory: backend
 
     steps:
     - uses: actions/checkout@v3
