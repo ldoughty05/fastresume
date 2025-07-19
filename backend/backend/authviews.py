@@ -11,8 +11,10 @@ import json
 
 
 load_dotenv()
-logins_raw = os.getenv("KNOWN_ORIGIN_LOGINS")
 try:
+    logins_raw = os.getenv("KNOWN_ORIGIN_LOGINS")
+    if not logins_raw:
+        raise ValueError("KNOWN_ORIGIN_LOGINS not set in .env file")
     KNOWN_ORIGIN_LOGINS = json.loads(logins_raw)
 except json.JSONDecodeError as e:
     raise ValueError(f"Could not parse KNOWN_ORIGIN_LOGINS from .env: {e}")
