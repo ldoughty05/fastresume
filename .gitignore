@@ -1,4 +1,7 @@
 .env
-env/
+.vscode
+venv
+env
+logs
 db.sqlite3
 postgresql_secrets.txt

@@ -7,6 +7,7 @@ from .authviews import KnownHostView
 
 def api_welcome(request):
     return HttpResponse("Welcome to the FastResume API!")
+    
 urlpatterns = [
     path("", api_welcome, name="api-welcome"),
     path("admin/", admin.site.urls),
