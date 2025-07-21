@@ -11,7 +11,7 @@ pip install --upgrade pip --quiet
 pip install -r requirements.txt --quiet
 
 echo "💠 Django collectstatic and migrate..."
-python manage.py collectstatic --noinput --quiet
+python manage.py collectstatic --noinput
 python manage.py migrate --noinput
 python manage.py check
 
