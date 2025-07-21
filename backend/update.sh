@@ -7,11 +7,11 @@ echo "Pulling latest changes from main branch..."
 git pull origin main
 
 echo "Installing dependencies..."
-pip install --upgrade pip
-pip install -r requirements.txt
+pip install --upgrade pip --quiet
+pip install -r requirements.txt --quiet
 
 echo "Django collectstatic and migrate..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --quiet
 python manage.py migrate --noinput
 python manage.py check
 
