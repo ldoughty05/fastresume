@@ -37,9 +37,9 @@ function Home() {
             .catch((err) => alert(err));
     };
 
-    const deleteExperienceFromDatabase = (id) => {
+    const deleteExperienceFromDatabase = (experienceType, id) => {
         api
-            .delete(`/api/experiences/all/delete/${id}/`)
+            .delete(`/api/experiences/${experienceType}/delete/${id}/`)
             .then((res) => {
                 if (res.status === 204) alert("Experience deleted!");
                 else alert("Failed to delete experience.");
@@ -53,15 +53,15 @@ function Home() {
             <div>
                 <h1>Education</h1>
                 {education.map((experience, index) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} type="education" key={`education-${index}`} />
+                    <Experience experience={experience} onDelete={() => deleteExperienceFromDatabase("education", experience.id)} type="education" key={`education-${index}`} />
                 ))}
                 <h1>Jobs</h1>
                 {jobs.map((experience, index) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} type="job" key={`job-${index}`} />
+                    <Experience experience={experience} onDelete={() => deleteExperienceFromDatabase("jobs", experience.id)} type="job" key={`job-${index}`} />
                 ))}
                 <h1>Projects</h1>
                 {projects.map((experience, index) => (
-                    <Experience experience={experience} onDelete={deleteExperienceFromDatabase} type="project" key={`project-${index}`} />
+                    <Experience experience={experience} onDelete={() => deleteExperienceFromDatabase("projects", experience.id)} type="project" key={`project-${index}`} />
                 ))}
             </div>
             <br/><br/>

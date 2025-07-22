@@ -6,3 +6,5 @@ static
 db.sqlite3
 django_secrets.txt
 postgresql_secrets.txt
+__pycache__
+*.pyc

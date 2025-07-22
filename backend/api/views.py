@@ -22,6 +22,14 @@ class JobExperienceListCreate(generics.ListCreateAPIView):
         user = self.request.user
         return JobExperience.objects.filter(author=user)
     
+class JobExperienceDelete(generics.DestroyAPIView):
+    serializer_class = JobExperienceSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return JobExperience.objects.filter(author=user)    
+
 class EducationExperienceListCreate(generics.ListCreateAPIView):
     serializer_class = EducationExperienceSerializer
     permission_classes = [IsAuthenticated]
@@ -30,6 +38,14 @@ class EducationExperienceListCreate(generics.ListCreateAPIView):
         user = self.request.user
         return EducationExperience.objects.filter(author=user)
     
+class EducationExperienceDelete(generics.DestroyAPIView):
+    serializer_class = EducationExperienceSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return EducationExperience.objects.filter(author=user)   
+    
 class ProjectExperienceListCreate(generics.ListCreateAPIView):
     serializer_class = ProjectExperienceSerializer
     permission_classes = [IsAuthenticated]
@@ -37,6 +53,14 @@ class ProjectExperienceListCreate(generics.ListCreateAPIView):
     def get_queryset(self):
         user = self.request.user
         return ProjectExperience.objects.filter(author=user)
+    
+class ProjectExperienceDelete(generics.DestroyAPIView):
+    serializer_class = ProjectExperienceSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return ProjectExperience.objects.filter(author=user)   
 
 class AllExperienceListCreate(generics.ListCreateAPIView):
     serializer_class = ExperienceSerializer
@@ -44,15 +68,6 @@ class AllExperienceListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return get_all_experience_queryset(self)
-
-
-class ExperienceDelete(generics.DestroyAPIView):
-    serializer_class = ExperienceSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return get_all_experience_queryset(self)
-
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
