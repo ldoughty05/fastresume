@@ -28,17 +28,13 @@ else
     	fi
 fi
 
+sudo systemctl restart fastresumebacked
 if systemctl is-active --quiet fastresumebackend; then
-	echo "✅ fastresumebackend is running"
-else 
-	echo "fastresumebackend needs to restart"
-	sudo systemctl restart fastresumebacked
-	if systemctl is-active --quiet fastresumebackend; then
-		echo "✅ fastresumebackend restarted successfully and is running"
-    	else
-        	echo "❌ Failed to restart fastresumebackend"
-    	fi
-fi
+	echo "✅ fastresumebackend restarted successfully and is running"
+   	else
+       	echo "❌ Failed to restart fastresumebackend"
+   	fi
+
 echo "💠 $(date "+%Y-%m-%d %H:%M:%S.%3N") FastResume updated" >> fastresumebackend_update.log
 popd
 echo "✅ FastResume updated and restarted successfully."
