@@ -12,6 +12,8 @@ pip install -r requirements.txt --quiet
 
 echo "💠 Django collectstatic and migrate..."
 python manage.py collectstatic --noinput
+sudo cp -r staticfiles/* /var/www/fastresume-backend
+
 python manage.py migrate --noinput
 python manage.py check
 
@@ -28,7 +30,7 @@ else
     	fi
 fi
 
-sudo systemctl restart fastresumebacked
+sudo systemctl restart fastresumebackend
 if systemctl is-active --quiet fastresumebackend; then
 	echo "✅ fastresumebackend restarted successfully and is running"
    	else

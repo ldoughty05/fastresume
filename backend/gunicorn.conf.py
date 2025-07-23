@@ -1,7 +1,6 @@
 import multiprocessing
 
-bind = "unix:/home/pi/Git/fastresume/backend/fastresumebackend.sock"
-# bind = "unix:fastresumebackend.sock"
+bind = "unix:/var/www/fastresume-backend/fastresumebackend.sock"
 
 workers = 2
 threads = 1
