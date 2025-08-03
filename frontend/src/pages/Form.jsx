@@ -3,7 +3,7 @@ import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css"
-import LoadingIndicator from "./LoadingIndicator";
+import LoadingIndicator from "../components/LoadingIndicator";
 import PropTypes from "prop-types";
 
 Form.propTypes = {
@@ -27,7 +27,7 @@ function Form(props) {
             if (props.method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/")
+                navigate("/resume")
             } else {
                 navigate("/login")
             }

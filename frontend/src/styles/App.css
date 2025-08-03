@@ -1,0 +1,13 @@
+:root {
+  --background-color: #FFFCD6;
+  --grid-lines-color: #86CB92;
+  --grid-spacing-large: 8rem;
+  --grid-spacing-small: 2rem;
+  --hero-color: #88CCF1;
+  --color-A: #C03221;
+  --color-B: #FDEB5D;
+  --footer-color: #051923;
+
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
