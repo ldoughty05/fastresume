@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Home.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle, faAmazon, faMeta, faMicrosoft, faApple, faOpenai, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 function Home() {
   const navigate = useNavigate();
@@ -47,11 +48,12 @@ function Home() {
           <div className={styles.social_proof}>
             <h1>Perfect for job seekers targeting companies like...</h1>
             <ul>
-              <li>Google</li>
-              <li>Amazon</li>
-              <li>Meta</li>
-              <li>Microsoft</li>
-              <li>Apple</li>
+              <li><FontAwesomeIcon icon={faGoogle} widthAuto/></li>
+              <li><FontAwesomeIcon icon={faAmazon} widthAuto/></li>
+              <li><FontAwesomeIcon icon={faMeta} widthAuto/></li>
+              <li><FontAwesomeIcon icon={faMicrosoft} widthAuto/></li>
+              <li><FontAwesomeIcon icon={faApple} widthAuto/></li>
+              <li><FontAwesomeIcon icon={faOpenai} widthAuto/></li>
             </ul>
             <h1>Trusted to Make Application Season Easier</h1>
             <button className={styles.get_started_button} onClick={() => navigate('/register')}>Use it for Free</button>
@@ -62,24 +64,26 @@ function Home() {
         <h3>Krank Software Solutions</h3>
         <div className={styles.links_grid}>
           <ul>
-            <li>GET STARTED</li>
+            <lh>GET STARTED</lh>
+            <li><button onClick={() => navigate('/register')}>Sign Up</button></li>
+            <li><button onClick={() => navigate('/login')}>Log In</button></li>
           </ul>
           <ul>
-            <li>SOLUTIONS</li>
+            <lh>SOLUTIONS</lh>
           </ul>
           <ul>
-            <li>RESOURCES</li>
+            <lh>RESOURCES</lh>
           </ul>
           <ul>
-            <li>LEGAL</li>
+            <lh>LEGAL</lh>
           </ul>
         </div>
         <hr/>
-        <p>Status:</p>
+        <p>Status: <span className={styles.status}>All Systems Operational</span></p>
         <ul className={styles.socials}>
-          <li>LinkedIn</li>
+          <li><a href="https://www.linkedin.com/company/krank-software-solutions/"><FontAwesomeIcon icon={faLinkedin} widthAuto/></a></li>
         </ul>
-        <p>© 2023 FastResume. All rights reserved.</p>
+        <p>© 2025 FastResume. All rights reserved.</p>
       </div>
     </div>
   )
