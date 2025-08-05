@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Home.module.css';
+import '../styles/App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faAmazon, faMeta, faMicrosoft, faApple, faOpenai, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { Logo } from '../components/Logo';
 
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className={styles.home}>
+    <div className="background_grid">
       <div className={styles.header}>
-        <h1>Fast Resume</h1>
+        <Logo />
         <div className={styles.header_buttons}>
           <button className={styles.log_in_button} onClick={() => navigate('/login')}>Log in</button>
           <button className={styles.hamburger_button} >

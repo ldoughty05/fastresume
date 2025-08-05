@@ -1,27 +1,21 @@
-import Form from "./Form"
+import Form from "../components/Form"
 import { useNavigate } from 'react-router-dom';
-
+import '../styles/App.css'
+import styles from '../styles/Form.module.css';
+import { Logo } from '../components/Logo';
 
 function Login() {
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/register/'); // or /api/user/register/?
-    };
-
-    
     return (
-    <div>
-        <div id ="logIn" >
-            <img src ="LogoV2.png" alt = "logo"></img>
-            <Form route="/api/token/" method="login" />
+        <div className="background_grid" style={{ height: "100vh" }}>
+            <div className={styles.content}>
+                <Logo />
+                <Form route="/api/token/" method="login" />
+                <p>Don&apos;t have an account?</p>
+                <button onClick={() => { navigate('/register/') }}>Register</button>
+            </div>
         </div>
-    
-        <button className="register-button" onClick={handleClick}>
-            Register
-        </button>
-
-    </div>
     )
 }
 

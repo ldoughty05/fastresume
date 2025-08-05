@@ -11,3 +11,17 @@
   font-size: 16px;
   font-family: 'Inter', sans-serif;
 }
+
+.background_grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;;
+  width: 100vw;
+  background-color: var(--background-color);
+
+  opacity: 0.8;
+  background-image:  linear-gradient(var(--grid-lines-color) 2px, transparent 2px), linear-gradient(90deg, var(--grid-lines-color) 2px, transparent 2px), linear-gradient(var(--grid-lines-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-lines-color) 1px, var(--background-color) 1px);
+  background-size: var(--grid-spacing-large) var(--grid-spacing-large), var(--grid-spacing-large) var(--grid-spacing-large), var(--grid-spacing-small) var(--grid-spacing-small), var(--grid-spacing-small) var(--grid-spacing-small);
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}

@@ -1,0 +1,11 @@
+.logo button {
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+.logo {
+  background-color: transparent;
+}
