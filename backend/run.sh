@@ -11,9 +11,9 @@ else
     	fi
 fi
 
-sudo systemctl restart fastresumebackend
-if systemctl is-active --quiet fastresumebackend; then
-	echo "✅ fastresumebackend restarted successfully and is running"
+sudo systemctl restart fastresume-backend
+if systemctl is-active --quiet fastresume-backend; then
+	echo "✅ fastresume-backend restarted successfully and is running"
    	else
-       	echo "❌ Failed to restart fastresumebackend"
+       	echo "❌ Failed to restart fastresume-backend"
    	fi
