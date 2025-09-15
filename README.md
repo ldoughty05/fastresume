@@ -9,13 +9,13 @@ Cornhacks 2025
 1. Clone the repository with:  
 Linux: 
 ```{bash}
-$ git clone git@github.com:ldoughty05/django-resume-app.git
-$ cd django-resume-app
+$ git clone git@github.com:ldoughty05/fastresume.git
+$ cd fastresume
 ```
 Windows: 
 ```{bash}
-$ git clone https://github.com/ldoughty05/django-resume-app
-$ cd django-resume-app
+$ git clone git@github.com:ldoughty05/fastresume.git
+$ cd fastresume
 ```
 2. Create and activate a virtual python environment:  
 Linux:

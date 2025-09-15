@@ -9,5 +9,4 @@ urlpatterns = [
     path("experiences/projects/", views.ProjectExperienceListCreate.as_view(), name="project-experience-list"),
     path("experiences/projects/delete/<int:pk>/", views.ProjectExperienceDelete.as_view(), name="delete-project-experience"),
     path("experiences/all/", views.AllExperienceListCreate.as_view(), name="all-experience-list"),
-
 ]
