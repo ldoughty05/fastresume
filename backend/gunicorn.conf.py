@@ -2,7 +2,7 @@ import multiprocessing
 
 # bind = "unix:/var/www/fastresume-backend/fastresumebackend.sock"
 # bind = "unix:/root/Git/fastresume/backend/fastresume-backend.sock"
-bind = "unix:/run/fastresume/fastresume-backend.sock;"
+bind = "unix:/run/fastresume/fastresume-backend.sock"
 
 workers = 2
 threads = 1
